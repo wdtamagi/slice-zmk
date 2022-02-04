@@ -1,0 +1,54 @@
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+
+/ {
+	model = "Nordic nRF52840 Dongle Official";
+
+	chosen {
+		zephyr,code-partition = &code_partition;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+};
+
+&adc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&usbd {
+	status = "okay";
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		// Application starts at 0x1000 after the MBR.
+		code_partition: partition@1000 {
+			label = "code_partition";
+			reg = <0x00001000 0x000d7000>;
+		};
+
+		// Define storage partition. 0xe0000 to 0xfcfff is used for the nRF5
+		// bootloader and 0xfd000 to 0xfffff is used by the bootloader/MBR for
+		// settings.
+		storage_partition: partition@d8000 {
+			label = "storage";
+			reg = <0x000d8000 0x00008000>;
+		};
+	};
+};

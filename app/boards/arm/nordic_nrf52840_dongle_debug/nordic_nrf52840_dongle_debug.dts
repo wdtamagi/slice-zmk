@@ -1,0 +1,56 @@
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+
+/ {
+	model = "Nordic nRF52840 Dongle Debug";
+
+	chosen {
+		zephyr,code-partition = &code_partition;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+};
+
+&adc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&usbd {
+	status = "okay";
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		// Application starts at 0x1000 after the MBR.
+		code_partition: partition@1000 {
+			label = "code_partition";
+			reg = <0x00001000 0x000ec000>;
+		};
+
+		// Define storage partition before the bootloader, which starts at
+		// 0xf4000. The debug dongle storage partition is different from the
+		// SliceMK version since I start started developing with it before
+		// deciding to change the size and position of the partition. I might
+		// change this later for consistency.
+		storage_partition: partition@ed000 {
+			label = "storage";
+			reg = <0x000ed000 0x00007000>;
+		};
+	};
+};
