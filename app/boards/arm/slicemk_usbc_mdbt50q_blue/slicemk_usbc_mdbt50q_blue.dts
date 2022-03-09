@@ -9,6 +9,14 @@
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 	};
+
+	// The USB C dongle doesn't have anything beside the reset button but ZMK
+	// needs something to be defined for kscan so define an arbitrary GPIO pin.
+	kscan0: kscan {
+		compatible = "zmk,kscan-gpio-direct";
+		label = "KSCAN";
+		input-gpios = <&gpio0 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	};
 };
 
 &adc {
