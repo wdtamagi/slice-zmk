@@ -1,0 +1,43 @@
+config ZMK_BLE
+	default y
+
+config ZMK_USB
+	default y
+
+if SHIELD_DACTYL_DONGLE
+
+config ZMK_KEYBOARD_NAME
+	default "Dactyl"
+
+endif
+
+if SHIELD_DACTYL_LEFTCENTRAL || SHIELD_DACTYL_LEFTSINGLE
+
+config ZMK_KEYBOARD_NAME
+	default "Dactyl Left"
+
+endif
+
+if SHIELD_DACTYL_RIGHTCENTRAL || SHIELD_DACTYL_RIGHTSINGLE
+
+config ZMK_KEYBOARD_NAME
+	default "Dactyl Right"
+
+endif
+
+if SHIELD_DACTYL_DONGLE || SHIELD_DACTYL_LEFTCENTRAL || SHIELD_DACTYL_RIGHTCENTRAL
+
+config ZMK_SPLIT
+	default y
+
+config ZMK_SPLIT_BLE_ROLE_CENTRAL
+	default y
+
+endif
+
+if !SHIELD_DACTYL_DONGLE
+
+config ZMK_BATTERY_VOLTAGE_DIVIDER
+	default y
+
+endif

@@ -1,0 +1,77 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+        keymap {
+                compatible = "zmk,keymap";
+
+                default_layer {
+// ------------------------------------------------------------------
+// |  R  |  C  |  L  |  M  |  K   |  ...  |  Z  |  F   |  U  |  ,  |  '  |
+// |  I  |  S  |  R  |  I  |  G   |  ...  |  P  |  N   |  E  |  A  |  O  |
+// |  Q  |  V  |  W  |  D  |  J   |  ...  |  B  |  H   |  /  |  .  |  X  |
+//             | GUI | SPC | BSPC |  ...  | TAB | ENT  | ESC |
+//                | SHFT | CTRL |    ...     | ALT | NUM  |
+                        bindings = <
+   &kp Y &kp C &kp L    &kp M      &kp K       &kp Z       &kp F   &kp U     &kp COMMA  &kp SINGLE_QUOTE   
+   &kp I &kp S &kp R    &kp T      &kp G       &kp P       &kp N   &kp E     &kp A      &kp O
+   &kp Q &kp V &kp W    &kp D      &kp J       &kp B       &kp H   &kp SLASH &kp DOT    &kp X
+               &kp LGUI &kp SPACE  &kp BSPC    &kp TAB     &kp RET &kp ESC
+                        &sk LSHIFT &kp LCTRL   &kp RALT    &mo 1 
+                        >;
+                };
+                number_layer {
+// ------------------------------------------------------------------
+// |   1    |   2   |   3    |   4   |   5    |  ...  |   6   |   7   |  8   |   9   |   0     |
+// |  BT1   |  BT2  |  BT3   |  BT4  |  BT5   |  ...  |  LFT  |  DWN  |  UP  |  RGT  |  CAPSW  |
+// |  BTCL  |       |        |       |  PSCR  |  ...  |       |   ;   |      |       |         |
+//                  |  SYMB  |  SPC  |  BSPC  |  ...  |       |       |      |
+//                       | SHFT | CTRL |       ...      |       |      |
+                        bindings = <
+   &kp N1       &kp N2       &kp N3       &kp N4       &kp N5          &kp N6    &kp N7   &kp N8 &kp N9    &kp N0
+   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &kp LEFT  &kp DOWN &kp UP &kp RIGHT &caps_word
+   &bt BT_CLR   &trans       &trans       &trans       &kp PSCRN       &trans    &kp SEMI &trans &trans    &trans
+                             &mo 2        &kp SPACE    &kp BSPC        &trans    &trans   &trans
+                                          &sk LSHIFT   &kp LCTRL       &trans    &trans 
+                        >;
+                };
+                symbol_layer {
+// ------------------------------------------------------------------
+// |  "|"  |  \  |  ~  |  `  |     |  ...  |     |  %   |  #  |  /  |  ?  |
+// |   A   |  S  |  D  |  F  |     |  ...  |     |  $   |  -  |  _  |  &  |
+// |   Z   |  X  |  C  |  V  |     |  ...  |     |  ^   |  *  |  @  |  !  |
+//               |     |     |     |  ...  |     |      |     |
+//                  |     |     |     ...     |     |      |
+                        bindings = <
+   &kp PIPE  &kp BSLH  &kp TILDE &kp GRAVE &trans         &trans &kp PRCNT &kp HASH  &kp SLASH &kp QMARK
+   &kp EQUAL &kp LBKT  &kp LBRC  &kp LPAR  &trans         &trans &kp DLLR  &kp MINUS &kp UNDER &kp AMPS
+   &kp PLUS  &kp RBKT  &kp RBRC  &kp RPAR  &trans         &trans &kp CARET &kp ASTRK &kp AT    &kp EXCL
+                       &trans    &trans    &trans         &mo 3  &trans    &trans
+                                 &trans    &trans         &trans &trans
+                        >;
+                };
+                config_layer {
+// ------------------------------------------------------------------
+// |  "|"  |  \  |  ~  |  `  |     |  ...  |     |  %   |  #  |  /  |  ?  |
+// |   A   |  S  |  D  |  F  |     |  ...  |     |  $   |  -  |  _  |  &  |
+// |   Z   |  X  |  C  |  V  |     |  ...  |     |  ^   |  *  |  @  |  !  |
+//               |     |     |     |  ...  |     |      |     |
+//                  |     |     |     ...     |  RST  |  BOOT  |
+                        bindings = <
+   &trans &trans &trans &bootloader &reset       &reset &bootloader &trans &trans &trans 
+   &trans &trans &trans &trans      &trans       &trans &trans      &trans &trans &trans 
+   &trans &trans &trans &trans      &trans       &trans &trans      &trans &trans &trans 
+                 &trans &trans      &trans       &trans &trans      &trans
+                        &trans      &trans       &trans &trans 
+                        >;
+                };
+        };
+};
